@@ -72,5 +72,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # big no no no
-/AlternativeArt/huanjing/Proxy Games/Stylized Nature Kit Lite/Misc/HDRI.hdr
-/msyhbdSDF8192.asset
+*/AlternativeArt/huanjing/Proxy Games/Stylized Nature Kit Lite/Misc/HDRI.hdr
+# */msyhbdSDF8192.asset
+*/Art/Fonts/msyhbdSDF8192.asset
+Assets/Art/Fonts/msyhbdSDF8192.asset
