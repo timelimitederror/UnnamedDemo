@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: ArtAssets
+  m_EditorClassIdentifier: 
+  m_GroupName: ArtAssets
+  m_Data:
+    m_SerializedData: []
+  m_GUID: bd30e7a58eead6b44ba826ddb9b8a996
+  m_SerializeEntries:
+  - m_GUID: e5e0f1907242a2d49a4a74b7cd4b0717
+    m_Address: SpecialEffect
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a04b5a2d86ea5d645a8185b862f4ad29
+    m_Address: Audio
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 61898b54d8484b844b71dd2e38acf498, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: a85e926e55950554d9f0f76e0094bd55, type: 2}
+    - {fileID: 11400000, guid: 5a897ba193dfaa240a4d81fbd98de4ee, type: 2}
