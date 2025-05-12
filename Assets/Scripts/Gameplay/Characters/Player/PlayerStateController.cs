@@ -13,7 +13,7 @@ public class PlayerStateController : MonoBehaviour
     private const int MIXING = 5;
     private const int NORMAL_ATTACK = 6;
 
-    //private PlayerController playerController;
+    private PlayerController playerController;
 
     private KeyCode skill_1Key = KeyCode.Alpha1;
     private KeyCode skill_2Key = KeyCode.Alpha2;
@@ -58,6 +58,7 @@ public class PlayerStateController : MonoBehaviour
     {
         //playerController = GetComponent<PlayerController>();
         seController = GetComponent<PlayerSpecialEffectController>();
+        playerController = GetComponent<PlayerController>();
 
         // º”‘ÿººƒ‹
         skillDictionary[MIXING] = new MixingColor();
@@ -265,6 +266,11 @@ public class PlayerStateController : MonoBehaviour
         {
             skill.uninstallSkill();
         }
+    }
+
+    public bool isFall()
+    {
+        return playerController.IsFall;
     }
 
     public class ScheduleTask

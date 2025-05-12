@@ -31,7 +31,7 @@ public class NormalAttack : PlayerSkill
 
     public override bool enable()
     {
-        if (playerController == null || redAmmPool == null || greenAmmPool == null || blueAmmPool == null)
+        if (playerController == null || redAmmPool == null || greenAmmPool == null || blueAmmPool == null || playerController.isFall())
         {
             return false;
         }

@@ -25,7 +25,7 @@ public class SingleAttackSkill02 : PlayerSkill
 
     public override bool enable()
     {
-        if (playerController == null || ammPool == null)
+        if (playerController == null || ammPool == null || playerController.isFall())
         {
             return false;
         }

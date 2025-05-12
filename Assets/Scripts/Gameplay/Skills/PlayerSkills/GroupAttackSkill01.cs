@@ -29,7 +29,7 @@ public class GroupAttackSkill01 : PlayerSkill
 
     public override bool enable()
     {
-        if (playerController == null || sePool == null)
+        if (playerController == null || sePool == null || playerController.isFall())
         {
             return false;
         }
@@ -135,6 +135,7 @@ public class GroupAttackSkill01 : PlayerSkill
             lastUsedPosition,
             RADIUS_P,
             enemyLayer);
+        List<EnemyControllerBase> enemys = new List<EnemyControllerBase>();
         foreach (Collider coll in results)
         {
             EnemyControllerBase enemy = coll.gameObject.GetComponent<EnemyControllerBase>();
@@ -142,7 +143,12 @@ public class GroupAttackSkill01 : PlayerSkill
                 && MyMathUtils.horizontalDistance(lastUsedPosition, enemy.transform.position) <= HORIZONTAL_DISTANCE
                 && MyMathUtils.verticalDistance(lastUsedPosition, enemy.transform.position) <= VERTICAL_DISTANCE)
             {
-                enemy.damage(SkillColor.Mixing, DAMAGE);
+                enemy = enemy.GetBody();
+                if (!enemys.Contains(enemy)) // 避免多次对分体boss造成伤害
+                {
+                    enemy.damage(SkillColor.Mixing, DAMAGE);
+                    enemys.Add(enemy);
+                }
             }
         }
 

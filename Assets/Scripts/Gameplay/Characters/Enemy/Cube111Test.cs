@@ -5,16 +5,18 @@ using UnityEngine;
 
 public class Cube111Test : EnemyControllerBase
 {
-    public TextMeshProUGUI tmp;
+    public TextMeshPro tmp;
     private SkillColor thisColor = SkillColor.Red;
     private int redHealth = 1000;
     private int greenHealth = 1000;
     private int blueHealth = 1000;
     private EnemyType enemyType = EnemyType.Life;
+    private Transform cameraTransform;
 
     void Start()
     {
         setText();
+        cameraTransform = Camera.main.transform;
     }
 
     void Update()
@@ -48,7 +50,9 @@ public class Cube111Test : EnemyControllerBase
             redHealth = 1000;
             greenHealth = 1000;
             blueHealth = 1000;
+            setText();
         }
+        tmp.transform.forward = -cameraTransform.forward;
     }
 
     public override void damage(SkillColor color, int value)

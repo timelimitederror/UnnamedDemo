@@ -10,6 +10,11 @@ public abstract class EnemyControllerBase : MonoBehaviour
 
     public abstract EnemyType getEnemyType();
 
+    public virtual EnemyControllerBase GetBody()
+    {
+        return this;
+    }
+
     public enum EnemyType { 
         Rock = 1,
         Life = 2

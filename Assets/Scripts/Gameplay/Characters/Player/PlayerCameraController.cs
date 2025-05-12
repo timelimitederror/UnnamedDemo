@@ -13,6 +13,10 @@ public class PlayerCameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!TimeManager.Instance.timeFlow())
+        {
+            return;
+        }
         if (Input.GetKeyDown(switchKey))
         {
             fPCamera.m_XAxis.Value = normalCamera.m_XAxis.Value;
