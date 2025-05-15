@@ -270,4 +270,11 @@ public class PlayerController : MonoBehaviour
             EventBus.Publish<PlayerStaminaChanged>(new PlayerStaminaChanged(stamina, maxStamina));
         }
     }
+
+    public void ChangeVeolity(float xValue, float yValue, float zValue)
+    {
+        velocity.x += xValue;
+        velocity.y += yValue;
+        velocity.z += zValue;
+    }
 }

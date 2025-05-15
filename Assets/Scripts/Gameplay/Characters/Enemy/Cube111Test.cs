@@ -10,7 +10,6 @@ public class Cube111Test : EnemyControllerBase
     private int redHealth = 1000;
     private int greenHealth = 1000;
     private int blueHealth = 1000;
-    private EnemyType enemyType = EnemyType.Life;
     private Transform cameraTransform;
 
     void Start()
@@ -52,7 +51,7 @@ public class Cube111Test : EnemyControllerBase
             blueHealth = 1000;
             setText();
         }
-        tmp.transform.forward = -cameraTransform.forward;
+        tmp.transform.forward = cameraTransform.forward;
     }
 
     public override void damage(SkillColor color, int value)
@@ -87,11 +86,6 @@ public class Cube111Test : EnemyControllerBase
     public override SkillColor getColor()
     {
         return thisColor;
-    }
-
-    public override EnemyType getEnemyType()
-    {
-        return enemyType;
     }
 
     private void die()

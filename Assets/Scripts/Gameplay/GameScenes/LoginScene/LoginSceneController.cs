@@ -21,6 +21,11 @@ public class LoginSceneController : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        AddressableAssetManager.Instance.releaseAsset(BGM03);
+    }
+
     private void loadAndPlayBgm03(object obj)
     {
         bgm03 = (AudioClip)obj;

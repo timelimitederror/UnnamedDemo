@@ -5,37 +5,41 @@ using UnityEngine.Events;
 
 public class EventBus
 {
-    private static readonly Dictionary<Type, Action<object>> Events = new Dictionary<Type, Action<object>>();
+    public static readonly Dictionary<Type, List<Action<object>>> Events = new Dictionary<Type, List<Action<object>>>();
 
     // 订阅带参数的事件
     public static void Subscribe<T>(Action<T> handler) where T : class
     {
         Type type = typeof(T);
-        if (!Events.TryGetValue(type, out var action))
+        if (!Events.TryGetValue(type, out var actionList))
         {
-            Events[type] = obj => handler(obj as T);
+            Events[type] = new List<Action<object>>();
+            Events[type].Add(obj => handler(obj as T));
         }
         else
         {
-            action += obj => handler(obj as T);
+            actionList.Add(obj => handler(obj as T));
         }
     }
 
     // 取消订阅
     public static void UnSubscribe<T>(Action<T> handler) where T : class
     {
-        if (Events.TryGetValue(typeof(T), out var action))
+        if (Events.TryGetValue(typeof(T), out var actionList))
         {
-            action -= obj => handler(obj as T);
+            actionList.Remove(obj => handler(obj as T));
         }
     }
 
     // 发布事件并传递参数
     public static void Publish<T>(T eventData) where T : class
     {
-        if (Events.TryGetValue(typeof(T), out var action))
+        if (Events.TryGetValue(typeof(T), out var actionList))
         {
-            action.Invoke(eventData);
+            foreach (Action<object> action in actionList)
+            {
+                action.Invoke(eventData);
+            }
         }
     }
 }

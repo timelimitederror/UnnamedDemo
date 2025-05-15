@@ -26,9 +26,9 @@ public class PlayerStateController : MonoBehaviour
 
     public int health = 1000;
     public int mixingValue = 0;
-    public int redValue = 95;
-    public int greenValue = 95;
-    public int blueValue = 95;
+    public int redValue = 0;
+    public int greenValue = 0;
+    public int blueValue = 0;
 
     public int maxHealth = 1000;
     public int maxMixing = 100;

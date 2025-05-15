@@ -8,7 +8,7 @@ using UnityEngine.Pool;
 public class SingleAttackSkill02 : PlayerSkill
 {
     private const int MIXING_COST = 20;
-    private const int DAMAGE_LIFE = 200;
+    private const int DAMAGE_LIFE = 2000;
     private const int DAMAGE_ROCK = 50;
     private const float COOLDOWN_TIME = 3f;
     private const float SPEED = 15f;

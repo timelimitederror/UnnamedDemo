@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 重复器 重复成功执行指定次数
 public class Repeat : Decorator
 {
     private int conunter; // 当前重复次数

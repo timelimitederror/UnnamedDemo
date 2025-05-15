@@ -11,17 +11,17 @@ public class PolluroAnimationController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void Attack01()
+    public void Attack01() // Í¶ÖÀ
     {
         animator.SetTrigger("attack01");
     }
 
-    public void Attack02()
+    public void Attack02() // ×óÊÖ´Á
     {
         animator.SetTrigger("attack02");
     }
 
-    public void Attack03()
+    public void Attack03() // ºð½Ð
     {
         animator.SetTrigger("attack03");
     }

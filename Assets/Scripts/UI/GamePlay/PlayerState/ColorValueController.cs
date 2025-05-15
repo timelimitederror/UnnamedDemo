@@ -11,7 +11,7 @@ public class ColorValueController : MonoBehaviour
 
     public void setColorValue(int value, int maxValue)
     {
-        slider.SetValueWithoutNotify((float)value / (float)maxValue);
+        slider.normalizedValue = (float)value / (float)maxValue;
         tmp.SetText(value.ToString());
     }
 }

@@ -6,9 +6,9 @@ using UnityEngine;
 public class TriggerController : MonoBehaviour
 {
     private Action<Collider> action;
-    private Action releaseAction;
-    private float activeTime = 100f;
-    private float lastActiveTime = 0f;
+    protected Action releaseAction;
+    private float activeTime = 0f;
+    protected float lastActiveTime = 0f;
 
     void OnEnable()
     {
@@ -17,15 +17,18 @@ public class TriggerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Time.fixedTime - lastActiveTime >= activeTime && releaseAction != null)
+        if (activeTime > 0f && Time.fixedTime - lastActiveTime >= activeTime && releaseAction != null)
         {
             releaseAction.Invoke();
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
-        action.Invoke(other);
+        if (action != null)
+        {
+            action.Invoke(other);
+        }
     }
 
     public void setAction(Action<Collider> action)
@@ -42,5 +45,4 @@ public class TriggerController : MonoBehaviour
     {
         this.releaseAction = action;
     }
-
 }

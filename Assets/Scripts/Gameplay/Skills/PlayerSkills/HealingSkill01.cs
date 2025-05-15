@@ -63,6 +63,7 @@ public class HealingSkill01 : PlayerSkill
     public override void uninstallSkill()
     {
         // 卸载特效预制体资源
+        specialEffectController.remove(specialEffectAddress);
         AddressableAssetManager.Instance.destroyGameObject(specialEffect);
         AddressableAssetManager.Instance.releaseAsset(specialEffectAddress);
         AddressableAssetManager.Instance.releaseAsset(soundAddress);

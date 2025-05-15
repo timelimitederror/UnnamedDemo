@@ -7,7 +7,7 @@ using UnityEngine.Pool;
 // 单体，召唤大型混色炮弹，直接摧毁一个单体有色岩石（对非岩石敌人伤害很低）
 public class SingleAttackSkill01 : PlayerSkill
 {
-    private const int MIXING_COST = 50;
+    private const int MIXING_COST = 20;
     private const int DAMAGE_ROCK = 1000000;
     private const int DAMAGE_LIFE = 100;
     private const float COOLDOWN_TIME = 3f;

@@ -15,6 +15,6 @@ public class StaminaController : MonoBehaviour
 
     public void setStaminaValue(float value, float maxValue)
     {
-        slider.SetValueWithoutNotify(value / maxValue);
+        slider.normalizedValue = value / maxValue;
     }
 }

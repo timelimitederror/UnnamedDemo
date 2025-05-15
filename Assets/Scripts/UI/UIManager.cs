@@ -62,6 +62,7 @@ public class UIManager : MonoBehaviourSinqletonBase<UIManager>
         }
         SceneManager.LoadScene("GameScene01");
         panelDictionary["PlayerPanel"].SetActive(true);
+        panelDictionary["VideoPanel"].SetActive(true);
     }
 
     // 退出到开始菜单
