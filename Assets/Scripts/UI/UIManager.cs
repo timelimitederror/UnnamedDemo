@@ -60,7 +60,14 @@ public class UIManager : MonoBehaviourSinqletonBase<UIManager>
         {
             panelDictionary[panelName].SetActive(false);
         }
+        panelDictionary["VideoPanel"].SetActive(true);
+        EventBus.Publish(new SceneLoading(true));
         SceneManager.LoadScene("GameScene01");
+    }
+
+    public void GameScene01UIActive()
+    {
+        EventBus.Publish(new SceneLoading(false));
         panelDictionary["PlayerPanel"].SetActive(true);
         panelDictionary["VideoPanel"].SetActive(true);
     }

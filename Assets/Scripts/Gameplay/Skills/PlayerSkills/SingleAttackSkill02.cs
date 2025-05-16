@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-// 单体技能，对非岩石敌人造成大量伤害，对岩石伤害很低，消耗20混色值
+// 单体技能，对非岩石敌人造成大量伤害200，对岩石伤害很低50，消耗20混色值
 public class SingleAttackSkill02 : PlayerSkill
 {
     private const int MIXING_COST = 20;
-    private const int DAMAGE_LIFE = 2000;
+    private const int DAMAGE_LIFE = 200;
     private const int DAMAGE_ROCK = 50;
     private const float COOLDOWN_TIME = 3f;
     private const float SPEED = 15f;

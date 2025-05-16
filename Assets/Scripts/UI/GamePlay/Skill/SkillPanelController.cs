@@ -26,6 +26,8 @@ public class SkillPanelController : MonoBehaviour
         EventBus.Subscribe(playerSkillStateChangedAction);
         EventBus.Subscribe(playerSkillKeyPositionChangedAction);
         EventBus.Subscribe(playerSkillColorChangedAction);
+
+        changeSkillKeyPosition(InitManager.Instance.GetKeyPosition());
     }
 
     private void changeSkillState(PlayerSkillStateChanged skillEvent)

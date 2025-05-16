@@ -46,6 +46,12 @@ public class PlayerStateController : MonoBehaviour
     private bool mixingEnable = false;
     private bool normalAttackEnable = true;
 
+    private bool isDie = false;
+    public bool IsDie
+    {
+        get { return isDie; }
+    }
+
     private float lastRestoreHealthTime = 0f;
     private int restoreHealthValue = 10;
 
@@ -53,12 +59,17 @@ public class PlayerStateController : MonoBehaviour
     private List<ScheduleTask> scheduleTaskList = new List<ScheduleTask>();
 
     PlayerSpecialEffectController seController;
+    PlayerAnimationController animationController;
 
     void Start()
     {
+        // 初始化键位配置
+        ChangeSkillKeyPosition(InitManager.Instance.GetKeyPosition());
+
         //playerController = GetComponent<PlayerController>();
         seController = GetComponent<PlayerSpecialEffectController>();
         playerController = GetComponent<PlayerController>();
+        animationController = GetComponent<PlayerAnimationController>();
 
         // 加载技能
         skillDictionary[MIXING] = new MixingColor();
@@ -79,11 +90,15 @@ public class PlayerStateController : MonoBehaviour
         setSkillColorUI();
         setSkillStateUI();
         setColorValueUI();
+
+        isDie = false;
+
+        EventBus.Subscribe(new Action<PlayerSkillKeyPositionChanged>(ChangeSkillKeyPosition));
     }
 
     void Update()
     {
-        if (!TimeManager.Instance.timeFlow())
+        if (!TimeManager.Instance.timeFlow() || isDie)
         {
             return;
         }
@@ -95,7 +110,7 @@ public class PlayerStateController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!TimeManager.Instance.timeFlow())
+        if (!TimeManager.Instance.timeFlow() || isDie)
         {
             return;
         }
@@ -186,7 +201,10 @@ public class PlayerStateController : MonoBehaviour
     {
         if (health <= 0)
         {
-            Debug.Log("你死了");
+            isDie = true;
+            gameObject.layer = 0; // Default
+            animationController.Die();
+            EventBus.Publish(new PlayerDie());
         }
     }
 
@@ -271,6 +289,16 @@ public class PlayerStateController : MonoBehaviour
     public bool isFall()
     {
         return playerController.IsFall;
+    }
+
+    private void ChangeSkillKeyPosition(PlayerSkillKeyPositionChanged kpEvent)
+    {
+        skill_1Key = kpEvent.skill_1Key;
+        skill_2Key = kpEvent.skill_2Key;
+        skill_3Key = kpEvent.skill_3Key;
+        skill_4Key = kpEvent.skill_4Key;
+        switchColorKey = kpEvent.armColorKey;
+        mixingColorKey = kpEvent.mixingKey;
     }
 
     public class ScheduleTask

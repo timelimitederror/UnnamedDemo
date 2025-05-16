@@ -102,6 +102,10 @@ public class PolluroController : EnemyControllerBase
                 Die();
                 return;
             }
+            if (playerStateController.IsDie)
+            {
+                return;
+            }
             behaviorTreeBuilder.TreeTick();
         }
     }
@@ -218,7 +222,7 @@ public class PolluroController : EnemyControllerBase
     private void BuildBehaviorTree()
     {
         // 开始开始
-        // 变换颜色使用条件：必须满足enable 当前血量与最高血量差>10%*max ，如果当前血量归零，立即变换颜色 这个不受冷却影响
+        // 变换颜色使用条件：必须满足enable 当前血量与最高血量差>5%*max ，如果当前血量归零，立即变换颜色 这个不受冷却影响
         // 创造小岩石使用条件：必须满足enable 检测玩家和boss的距离<35f 内部冷却10s 这个受公共冷却和私有冷却影响
         // 爆炸使用条件：必须满足enable 检测玩家和boss的距离<40f 内部冷却20s 这个受公共冷却和私有冷却影响
         // 平A使用条件： 必须满足enable 检测玩家和boss的距离<50f 填充技能 这个受公共冷却影响
@@ -261,24 +265,24 @@ public class PolluroController : EnemyControllerBase
                                         {
                                             case SkillColor.Red:
                                                 if (redHealth <= 0
-                                                || greenHealth - redHealth >= maxRed / 10
-                                                || blueHealth - redHealth >= maxRed / 10)
+                                                || greenHealth - redHealth >= maxRed / 20
+                                                || blueHealth - redHealth >= maxRed / 20)
                                                 {
                                                     return Node.Status.Success;
                                                 }
                                                 break;
                                             case SkillColor.Green:
                                                 if (greenHealth <= 0
-                                                || redHealth - greenHealth >= maxGreen / 10
-                                                || blueHealth - greenHealth >= maxGreen / 10)
+                                                || redHealth - greenHealth >= maxGreen / 20
+                                                || blueHealth - greenHealth >= maxGreen / 20)
                                                 {
                                                     return Node.Status.Success;
                                                 }
                                                 break;
                                             case SkillColor.Blue:
                                                 if (blueHealth <= 0
-                                                || redHealth - blueHealth >= maxBlue / 10
-                                                || greenHealth - blueHealth >= maxBlue / 10)
+                                                || redHealth - blueHealth >= maxBlue / 20
+                                                || greenHealth - blueHealth >= maxBlue / 20)
                                                 {
                                                     return Node.Status.Success;
                                                 }

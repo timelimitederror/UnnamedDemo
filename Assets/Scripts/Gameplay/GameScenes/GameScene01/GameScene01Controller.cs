@@ -19,6 +19,7 @@ public class GameScene01Controller : MonoBehaviour
 
     void Awake()
     {
+        UIManager.Instance.GameScene01UIActive();
         AddressableAssetManager.Instance.loadAsset(BGM01, new Action<object>(loadAndPlayBgm01));
         AddressableAssetManager.Instance.loadAsset(BGM03, obj =>
         {

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InstallPanelController : MonoBehaviour
 {
-    public GraphicsController graphicsController;
+    //public GraphicsController graphicsController;
     public KeyPositionController keyPositionController;
     public VoiceController voiceController;
 
@@ -32,12 +32,13 @@ public class InstallPanelController : MonoBehaviour
 
     public void closeInstallPanel()
     {
+        InitManager.Instance.SaveInit();
         gameObject.SetActive(false);
     }
 
     public void openVoiceInit()
     {
-        graphicsController.close();
+        //graphicsController.close();
         keyPositionController.close();
         voiceController.open();
     }
@@ -46,14 +47,14 @@ public class InstallPanelController : MonoBehaviour
     {
         voiceController.close();
         keyPositionController.open();
-        graphicsController.close();
+        //graphicsController.close();
     }
 
     public void openGraphicsInit()
     {
         voiceController.close();
         keyPositionController.close();
-        graphicsController.open();
+        //graphicsController.open();
     }
 
 }

@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
      */
     void Update()
     {
-        if (!TimeManager.Instance.timeFlow())
+        if (!TimeManager.Instance.timeFlow() || playerStateController.IsDie)
         {
             return;
         }

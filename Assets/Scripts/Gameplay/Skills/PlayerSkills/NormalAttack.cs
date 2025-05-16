@@ -8,10 +8,10 @@ using UnityEngine.Pool;
 // 当敌人与攻击不同色时，造成5点伤害，获得5点与技能相同的颜料值
 public class NormalAttack : PlayerSkill
 {
-    private const int DAMAGE_SUITABLE = 10;
-    private const int DAMAGE_UNSUITABLE = 5;
-    private const int COLOR_SUITABLE = 10;
-    private const int COLOR_UNSUITABLE = 5;
+    private const int DAMAGE_SUITABLE = 20;
+    private const int DAMAGE_UNSUITABLE = 10;
+    private const int COLOR_SUITABLE = 20;
+    private const int COLOR_UNSUITABLE = 10;
     private const float COOLDOWN_TIME = 0.7f;
     private const float SPEED = 15f;
     private const float ACTIVE_TIME = 3f;
@@ -100,7 +100,7 @@ public class NormalAttack : PlayerSkill
                 }, obj =>
                 {
                     AddressableAssetManager.Instance.destroyGameObject(obj);
-                }, true, 10, 1000);
+                }, true, 20, 1000);
         });
 
         AddressableAssetManager.Instance.loadAsset(greenAmmAddress, obj =>
@@ -138,7 +138,7 @@ public class NormalAttack : PlayerSkill
 
                         triggerController.setReleaseAction(() =>
                         {
-                            redAmmPool.Release(amm);
+                            greenAmmPool.Release(amm);
                         });
 
                         triggerController.setActiveTime(ACTIVE_TIME);
@@ -153,7 +153,7 @@ public class NormalAttack : PlayerSkill
                 }, obj =>
                 {
                     AddressableAssetManager.Instance.destroyGameObject(obj);
-                }, true, 10, 1000);
+                }, true, 20, 1000);
         });
 
         AddressableAssetManager.Instance.loadAsset(blueAmmAddress, obj =>
@@ -191,7 +191,7 @@ public class NormalAttack : PlayerSkill
 
                         triggerController.setReleaseAction(() =>
                         {
-                            redAmmPool.Release(amm);
+                            blueAmmPool.Release(amm);
                         });
 
                         triggerController.setActiveTime(ACTIVE_TIME);
@@ -206,7 +206,7 @@ public class NormalAttack : PlayerSkill
                 }, obj =>
                 {
                     AddressableAssetManager.Instance.destroyGameObject(obj);
-                }, true, 10, 1000);
+                }, true, 20, 1000);
         });
 
         AddressableAssetManager.Instance.loadAsset(soundAddress, new Action<object>(setSound));

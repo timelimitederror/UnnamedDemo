@@ -59,7 +59,7 @@ public class MyObjectPool<T> where T : class
             {
                 objectPool.Release(obj);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

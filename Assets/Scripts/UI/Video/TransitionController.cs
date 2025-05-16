@@ -24,7 +24,6 @@ public class TransitionController : MonoBehaviour
 
         action = new Action<GameScene01Victory>(victoryEvent =>
         {
-            Debug.Log("´¥·¢¶¯»­");
             isImgPlay = true;
             isImgAppear = true;
             isImgKeep = false;

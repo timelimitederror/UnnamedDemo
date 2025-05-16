@@ -1,12 +1,16 @@
 {
     "keyPosition":{
-        "menu":27,
         "skill_1":49,
         "skill_2":50,
         "skill_3":51,
         "skill_4":52,
         "switchColor":114,
-        "mixingColor":102,
-        "jump":32
+        "mixingColor":102
+    },
+    "voice":{
+        "bgmVolume":0.2,
+        "soundVolume":0.5,
+        "bgmIsMute":false,
+        "soundIsMute":false
     }
 }

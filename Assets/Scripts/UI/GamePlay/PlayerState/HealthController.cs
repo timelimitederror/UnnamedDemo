@@ -16,6 +16,7 @@ public class HealthController : MonoBehaviour
 
     public void setHealthValue(int value, int maxValue)
     {
+        
         slider.normalizedValue = (float)value / (float)maxValue;
         tmp.SetText(value + " / " + maxValue);
     }

@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ public class AudioManager : MonoBehaviourSinqletonBase<AudioManager>
 {
     private const float DEFAULT_BGM_VOLUME = 0.2f;
     private const float DEFAULT_SOUND_VOLULME = 0.5f;
+    private const string INIT_NAME = "voice";
 
     private AudioSource activeBgmAudioSource;
     private AudioSource bgmAS01;
@@ -23,6 +25,8 @@ public class AudioManager : MonoBehaviourSinqletonBase<AudioManager>
         set
         {
             bgmVolume = value;
+            init["bgmVolume"] = value;
+            InitManager.Instance.ReplaceInit(INIT_NAME, init);
             if (activeBgmAudioSource != null)
             {
                 activeBgmAudioSource.volume = bgmVolume;
@@ -38,6 +42,8 @@ public class AudioManager : MonoBehaviourSinqletonBase<AudioManager>
         set
         {
             soundVolume = value;
+            init["soundVolume"] = value;
+            InitManager.Instance.ReplaceInit(INIT_NAME, init);
             foreach (AudioSource audioSource in soundAudioSources)
             {
                 audioSource.volume = soundVolume;
@@ -45,19 +51,61 @@ public class AudioManager : MonoBehaviourSinqletonBase<AudioManager>
         }
     }
 
+    public bool BGMIsMute
+    {
+        get
+        {
+            return bgmAS01.mute;
+        }
+    }
+
+    private bool soundIsMute = false;
+    public bool SoundIsMute
+    {
+        get
+        {
+            return soundIsMute;
+        }
+    }
+
     // private AudioClip loginBGM;
     private float fadeDuration = 1f; // 切换bgm淡入淡出的时间
     private Coroutine currentFadeRoutine; // 加载bgm的协程
+    private JObject init;
+
+    public override void Awake()
+    {
+        base.Awake();
+
+        bgmAS01 = transform.GetChild(0).gameObject.GetComponent<AudioSource>();
+        bgmAS02 = transform.GetChild(1).gameObject.GetComponent<AudioSource>();
+        bgmAS01.volume = bgmVolume;
+        bgmAS02.volume = bgmVolume;
+        activeBgmAudioSource = bgmAS01;
+
+        // 初始化配置
+        JObject init = (JObject)InitManager.Instance.GetInitByName(INIT_NAME);
+        this.init = init;
+        bgmVolume = (float)init["bgmVolume"];
+        bgmAS01.volume = bgmVolume;
+        bgmAS02.volume = bgmVolume;
+        soundVolume = (float)init["soundVolume"];
+        bool bgmIsMute = (bool)init["bgmIsMute"];
+        if (bgmIsMute)
+        {
+            bgmMute();
+        }
+        else
+        {
+            bgmUnmute();
+        }
+        soundIsMute = (bool)init["soundIsMute"];
+    }
 
     void Start()
     {
         //bgmAudioSource = GetComponent<AudioSource>();
         //bgmAudioSource.volume = bgmVolume;
-        bgmAS01 = transform.GetChild(0).gameObject.GetComponent<AudioSource>();
-        bgmAS02 = transform.GetChild(1).gameObject.GetComponent<AudioSource>();
-        bgmAS01.volume = 0;
-        bgmAS02.volume = 0;
-        activeBgmAudioSource = bgmAS01;
     }
 
     public void playBGM(AudioClip audioClip)
@@ -125,18 +173,25 @@ public class AudioManager : MonoBehaviourSinqletonBase<AudioManager>
 
     public void bgmMute()
     {
+        init["bgmIsMute"] = true;
+        InitManager.Instance.ReplaceInit(INIT_NAME, init);
         bgmAS01.mute = true;
         bgmAS02.mute = true;
     }
 
     public void bgmUnmute()
     {
+        init["bgmIsMute"] = false;
+        InitManager.Instance.ReplaceInit(INIT_NAME, init);
         bgmAS01.mute = false;
         bgmAS02.mute = false;
     }
 
     public void soundMute()
     {
+        soundIsMute = true;
+        init["soundIsMute"] = true;
+        InitManager.Instance.ReplaceInit(INIT_NAME, init);
         foreach (AudioSource audioSource in soundAudioSources)
         {
             audioSource.mute = true;
@@ -145,6 +200,9 @@ public class AudioManager : MonoBehaviourSinqletonBase<AudioManager>
 
     public void soundUnmute()
     {
+        soundIsMute = false;
+        init["soundIsMute"] = false;
+        InitManager.Instance.ReplaceInit(INIT_NAME, init);
         foreach (AudioSource audioSource in soundAudioSources)
         {
             audioSource.mute = false;
@@ -154,6 +212,7 @@ public class AudioManager : MonoBehaviourSinqletonBase<AudioManager>
     public void addSoundAudioSource(AudioSource audioSource)
     {
         audioSource.volume = soundVolume;
+        audioSource.mute = soundIsMute;
         soundAudioSources.Add(audioSource);
     }
 

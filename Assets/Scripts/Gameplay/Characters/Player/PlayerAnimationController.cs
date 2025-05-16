@@ -87,6 +87,12 @@ public class PlayerAnimationController : MonoBehaviour
         animator.SetTrigger("skillHeavy");
     }
 
+    public void Die()
+    {
+        animator.SetBool("isFall", false);
+        animator.SetBool("isDie", true);
+    }
+
     public void LeftFoot()
     {
         if (runSound != null)

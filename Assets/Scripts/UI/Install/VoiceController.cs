@@ -23,6 +23,40 @@ public class VoiceController : MonoBehaviour
     {
         bgmSlider.value = AudioManager.Instance.BgmVolume;
         soundSlider.value = AudioManager.Instance.SoundVolume;
+
+        if (AudioManager.Instance.BGMIsMute)
+        {
+            isBgmMute = true;
+            bgmSlider.value = 0;
+            bgmSlider.interactable = false;
+            bgmMute.SetActive(true);
+            bgmUnmute.SetActive(false);
+        }
+        else
+        {
+            isBgmMute = false;
+            bgmSlider.interactable = true;
+            bgmSlider.value = AudioManager.Instance.BgmVolume;
+            bgmMute.SetActive(false);
+            bgmUnmute.SetActive(true);
+        }
+
+        if(AudioManager.Instance.SoundIsMute)
+        {
+            isSoundMute = true;
+            soundSlider.value = 0;
+            soundSlider.interactable = false;
+            soundMute.SetActive(true);
+            soundUnmute.SetActive(false);
+        }
+        else
+        {
+            isSoundMute = false;
+            soundSlider.value = AudioManager.Instance.SoundVolume;
+            soundSlider.interactable = true;
+            soundMute.SetActive(false);
+            soundUnmute.SetActive(true);
+        }
     }
 
     public void open()
